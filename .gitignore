@@ -3,6 +3,7 @@
 
 # Ignore variables files
 *.auto.tfvars
+terraform.tfvars
 
 # Ignore override files
 *.tfoverride
@@ -26,3 +27,4 @@ crash.*.log
 *.pem
 *.key
 *.pub
+
