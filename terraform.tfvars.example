@@ -1,0 +1,2 @@
+region  = "region_name"        # valid region like "eu-central-1"
+bucket_name = "unique_name"    # globally unique name needed for the bucket
