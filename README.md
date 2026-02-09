@@ -22,7 +22,8 @@ Deploys a static website using:
 - **AWS S3** for file storage
 - **Cloudfront** fpr HTTPS and CDN
 
->[!NOTE] All infrastructure is defined in Terraform files. Running `terraform apply` creates everything from scratch.
+>[!NOTE]
+> All infrastructure is defined in Terraform files. Running `terraform apply` creates everything from scratch.
 
 ---
 ## Prerequisites
@@ -43,7 +44,12 @@ If you want to use this setup you need:
 # Clone the repo
 git clone https://github.com/Hhshi7/chiron-edu-tf-s3.git
 cd chiron-edu-tf-s3/
+```
 
+> [!IMPORTANT]
+> Config info below:
+
+```bash
 # Copy example config
 cp terraform.tfvars.example terraform.tfvars
 
@@ -52,8 +58,8 @@ cp terraform.tfvars.example terraform.tfvars
 
 # Edit terraform.tfvars and set a unique bucket name
 # bucket_name must be globally unique across all AWS accounts
-
 ```
+
 ### Deploy Infrastructure
 
 ```bash
@@ -82,7 +88,8 @@ Takes about 5-10 minutes (CloudFront is slow to deploy ~ 4 minutes in my case).
 aws s3 sync ./site/ s3://bucket-name/
 ```
 
-[!NOTE] Replace `bucket-name` with whatever you set in `terraform.tfvars`.
+> [!IMPORTANT]
+> Replace `bucket-name` with whatever you set in `terraform.tfvars`.
 
 ### Get Website URL
 
@@ -96,20 +103,23 @@ If everything went smoothly visitng the URL should display our deployed index.ht
 
 ### Clean Up
 
->[!NOTE] Terraform by default needs to empty the S3 bucket before deleting it. In this setup force_destroy was set to true, so terraform can destroy the bucket even though it contains our .html files.
+> [!WARNING]
+> Terraform by default needs to empty the S3 bucket before deleting it. In this setup force_destroy was set to true, so terraform can destroy the bucket even though it contains our .html files.
 
 ```bash
 # Delete everything
 terraform destroy
 ```
-
->[!NOTE] Be carefull when using force_destroy. If you want to empty the bucket by hand use CLI:
+> [!CAUTION]
+> Be carefull when using force_destroy. If you want to empty the bucket by hand use CLI:
 
 ```bash
 aws s3 rm s3://bucket-name/ --recursive
 ```
 
 In case of this project we sync the .html files from our local repository so there is no need to worry about force destroy as we still have original files. Just keep that in mind.
+
+---
 
 ## Project Structure
 
@@ -123,6 +133,7 @@ In case of this project we sync the .html files from our local repository so the
 └── site/                   # Website files to upload
     └── index.html
 ```
+---
 
 ## What I Learned
 ### Terraform Basics
@@ -161,7 +172,7 @@ terraform output → Shows the website URL
 terraform destroy → Deletes everything
 ```
 
-
+---
 ## Design Decisions
 
 | Decision | Reasoning |
@@ -185,16 +196,14 @@ This is a learning project, so I kept it simple:
 
 These would be good additions for a real production setup or future projects.
 
-
+---
 ## Technologies
 
 - **Terraform** - Infrastructure as Code
 - **AWS S3** - Object storage / static hosting
 - **AWS CloudFront** - CDN for global distribution and HTTPS
 - **AWS CLI** - Uploading files to S3
-
-
-
+---
 ## Resources
 
 - [Terraform AWS Provider Docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
