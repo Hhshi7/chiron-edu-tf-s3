@@ -20,7 +20,7 @@ Personal learning project to understand Terraform basics by deploying a static w
 
 Deploys a static website using:
 - **AWS S3** for file storage
-- **Cloudfront** fpr HTTPS and CDN
+- **Cloudfront** for HTTPS and CDN
 
 >[!NOTE]
 > All infrastructure is defined in Terraform files. Running `terraform apply` creates everything from scratch.
@@ -160,15 +160,15 @@ In case of this project we sync the .html files from our local repository so the
 
 ### Architecture
 
-[WIP]
+![architecture diagram](architecture.jpg)
 
 ### Terraform Workflow
 
 ```
-terraform init   → Downloads AWS provider plugin
-terraform plan   → Shows what will be created/changed
-terraform apply  → Actually creates the infrastructure
-terraform output → Shows the website URL
+terraform init    → Downloads AWS provider plugin
+terraform plan    → Shows what will be created/changed
+terraform apply   → Actually creates the infrastructure
+terraform output  → Shows the website URL
 terraform destroy → Deletes everything
 ```
 
